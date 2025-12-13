@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Service Query Classifier | Sri Lanka</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600&family=Noto+Sans+Tamil:wght@400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="emblem">
+                        <span class="emblem-icon">&#127987;</span>
+                    </div>
+                    <div class="title-section">
+                        <h1 id="main-title">Government Service Classifier</h1>
+                        <p id="subtitle">Automaton-based Query Classification System</p>
+                    </div>
+                </div>
+                <div class="language-selector">
+                    <label id="lang-label">Language:</label>
+                    <select id="language-select">
+                        <option value="en">English</option>
+                        <option value="si">සිංහල</option>
+                        <option value="ta">தமிழ்</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Panel - DFA Visualization -->
+            <aside class="dfa-panel">
+                <div class="panel-header">
+                    <h2 id="dfa-title">DFA State Diagram</h2>
+                </div>
+                <div class="dfa-diagram">
+                    <div class="current-state-display">
+                        <span id="state-label">Current State:</span>
+                        <div class="state-badge" id="current-state">q0</div>
+                        <div class="state-name" id="state-name">START</div>
+                    </div>
+                    <div class="dfa-visual">
+                        <div class="state-node start-state" id="node-q0">
+                            <span>q0</span>
+                            <small>START</small>
+                        </div>
+                        <div class="transition-arrow">
+                            <span id="transition-text">δ(q0, input)</span>
+                        </div>
+                        <div class="state-nodes-grid">
+                            <div class="state-node accept-state" data-state="q1">
+                                <span>q1</span>
+                                <small>NIC</small>
+                            </div>
+                            <div class="state-node accept-state" data-state="q2">
+                                <span>q2</span>
+                                <small>Passport</small>
+                            </div>
+                            <div class="state-node accept-state" data-state="q3">
+                                <span>q3</span>
+                                <small>Birth</small>
+                            </div>
+                            <div class="state-node accept-state" data-state="q4">
+                                <span>q4</span>
+                                <small>Death</small>
+                            </div>
+                            <div class="state-node accept-state" data-state="q5">
+                                <span>q5</span>
+                                <small>Marriage</small>
+                            </div>
+                            <div class="state-node accept-state" data-state="q6">
+                                <span>q6</span>
+                                <small>License</small>
+                            </div>
+                            <div class="state-node accept-state" data-state="q7">
+                                <span>q7</span>
+                                <small>Vehicle</small>
+                            </div>
+                            <div class="state-node accept-state" data-state="q8">
+                                <span>q8</span>
+                                <small>Tax</small>
+                            </div>
+                            <div class="state-node accept-state" data-state="q9">
+                                <span>q9</span>
+                                <small>Pension</small>
+                            </div>
+                            <div class="state-node accept-state" data-state="q10">
+                                <span>q10</span>
+                                <small>Welfare</small>
+                            </div>
+                            <div class="state-node accept-state" data-state="q11">
+                                <span>q11</span>
+                                <small>Education</small>
+                            </div>
+                            <div class="state-node accept-state" data-state="q12">
+                                <span>q12</span>
+                                <small>Health</small>
+                            </div>
+                            <div class="state-node reject-state" data-state="q_reject">
+                                <span>q_rej</span>
+                                <small>REJECT</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="formal-definition">
+                    <h3 id="formal-title">Formal Definition</h3>
+                    <div class="definition-content">
+                        <p><strong>Σ</strong> = {Keywords in EN, SI, TA}</p>
+                        <p><strong>Q</strong> = {q0, q1...q12, q_reject}</p>
+                        <p><strong>q₀</strong> = q0 (Start State)</p>
+                        <p><strong>F</strong> = {q1, q2...q12}</p>
+                        <p><strong>δ</strong> = Keyword-based transitions</p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right Panel - Chat Interface -->
+            <section class="chat-panel">
+                <div class="chat-header">
+                    <h2 id="chat-title">Chat with Classifier</h2>
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span id="status-text">Online</span>
+                    </div>
+                </div>
+
+                <!-- Quick Action Buttons -->
+                <div class="quick-actions">
+                    <span id="quick-label">Quick queries:</span>
+                    <div class="action-buttons">
+                        <button class="quick-btn" data-query="NIC" data-si="හැඳුනුම්පත" data-ta="அடையாள அட்டை">NIC</button>
+                        <button class="quick-btn" data-query="Passport" data-si="ගමන් බලපත්‍රය" data-ta="கடவுச்சீட்டு">Passport</button>
+                        <button class="quick-btn" data-query="Birth Certificate" data-si="උප්පැන්න සහතිකය" data-ta="பிறப்புச் சான்றிதழ்">Birth</button>
+                        <button class="quick-btn" data-query="Driving License" data-si="රියදුරු බලපත්‍රය" data-ta="ஓட்டுநர் உரிமம்">License</button>
+                        <button class="quick-btn" data-query="Tax" data-si="බදු" data-ta="வரி">Tax</button>
+                        <button class="quick-btn" data-query="Health" data-si="සෞඛ්‍ය" data-ta="சுகாதாரம்">Health</button>
+                    </div>
+                </div>
+
+                <!-- Chat Messages -->
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message bot-message">
+                        <div class="message-avatar">
+                            <span>&#129302;</span>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-bubble">
+                                <p id="welcome-msg">Welcome! I'm the Government Service Query Classifier. I use a DFA (Deterministic Finite Automaton) to classify your queries about Sri Lankan government services.</p>
+                                <p id="instruction-msg">Try asking about: NIC, Passport, Birth Certificate, Driving License, Vehicle Registration, Tax, Pension, Samurdhi, Education, or Health services.</p>
+                            </div>
+                            <span class="message-time">System</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Input -->
+                <div class="chat-input-container">
+                    <div class="input-wrapper">
+                        <input type="text" id="user-input" placeholder="Type your query here..." autocomplete="off">
+                        <button id="send-btn" title="Send">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="input-hints">
+                        <span id="hint-text">Press Enter to send | Supports English, සිංහල, தமிழ்</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Automata Theory Assignment | Government Service Query Classifier using DFA</p>
+            <p>Supports: English | සිංහල | தமிழ்</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
