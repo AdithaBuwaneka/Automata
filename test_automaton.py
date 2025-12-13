@@ -317,9 +317,14 @@ def run_all_tests():
 
 
 if __name__ == "__main__":
-    print("\n" + "🏛️ " * 20)
+    # Set console encoding for Windows
+    import sys
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
+    print("\n" + "=" * 60)
     print("\n   GOVERNMENT SERVICE QUERY CLASSIFIER - DFA TEST SUITE")
     print("   Sri Lanka - Automata Theory Assignment\n")
-    print("🏛️ " * 20)
+    print("=" * 60)
 
     run_all_tests()
