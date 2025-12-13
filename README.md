@@ -2,9 +2,38 @@
 
 An automaton-based chatbot that classifies Sri Lankan government service queries using a Deterministic Finite Automaton (DFA). Supports English, Sinhala, and Tamil languages.
 
+---
+
+## Quick Start
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/AdithaBuwaneka/Automata.git
+cd Automata
+```
+
+### 2. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Run the Application
+```bash
+python app.py
+```
+
+### 4. Open in Browser
+```
+http://127.0.0.1:5000
+```
+
+---
+
 ## Automata Theory Assignment
 
 This project demonstrates the practical application of automata theory to solve a nationally relevant problem in Sri Lanka - classifying citizen queries about government services.
+
+---
 
 ## DFA Design
 
@@ -51,6 +80,8 @@ This project demonstrates the practical application of automata theory to solve 
 | q11 | Education | අධ්‍යාපනය | கல்வி |
 | q12 | Health Services | සෞඛ්‍ය සේවා | சுகாதார சேவைகள் |
 
+---
+
 ## Project Structure
 
 ```
@@ -59,6 +90,8 @@ Automata/
 ├── automaton.py              # DFA implementation (pure Python)
 ├── test_automaton.py         # Test cases for all languages
 ├── requirements.txt          # Python dependencies
+├── README.md                 # Documentation
+├── .gitignore                # Git ignore rules
 ├── templates/
 │   └── index.html            # Chat interface
 └── static/
@@ -68,57 +101,59 @@ Automata/
         └── app.js            # Frontend logic
 ```
 
-## Installation
+---
 
-1. **Clone or download the project**
-
-2. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Run the application:**
-   ```bash
-   python app.py
-   ```
-
-4. **Open in browser:**
-   ```
-   http://127.0.0.1:5000
-   ```
-
-## Usage
+## How to Use
 
 ### Web Interface
-- Type queries in English, Sinhala, or Tamil
-- Use quick action buttons for common services
-- View DFA state transitions in real-time
-- See ACCEPT/REJECT classification results
+
+1. Open http://127.0.0.1:5000 in your browser
+2. Select your language (English / Sinhala / Tamil)
+3. Type your query or click quick action buttons
+4. View the DFA state transition and classification result
 
 ### Example Queries
 
 **English:**
-- "How to apply for NIC?"
-- "Passport renewal process"
-- "Birth certificate application"
+```
+How to apply for NIC?
+Passport renewal process
+Birth certificate application
+Driving license renewal
+```
 
-**Sinhala:**
-- "හැඳුනුම්පත ගන්න ඕනේ"
-- "ගමන් බලපත්‍රය අලුත් කරන්න"
-- "උප්පැන්න සහතිකය"
+**Sinhala (සිංහල):**
+```
+හැඳුනුම්පත ගන්න ඕනේ
+ගමන් බලපත්‍රය අලුත් කරන්න
+උප්පැන්න සහතිකය
+රියදුරු බලපත්‍රය
+```
 
-**Tamil:**
-- "அடையாள அட்டை வேண்டும்"
-- "கடவுச்சீட்டு புதுப்பித்தல்"
-- "பிறப்புச் சான்றிதழ்"
+**Tamil (தமிழ்):**
+```
+அடையாள அட்டை வேண்டும்
+கடவுச்சீட்டு புதுப்பித்தல்
+பிறப்புச் சான்றிதழ்
+ஓட்டுநர் உரிமம்
+```
+
+---
 
 ## Running Tests
+
+Run the test suite to verify DFA functionality:
 
 ```bash
 python test_automaton.py
 ```
 
-Test results show ACCEPT/REJECT outcomes for 71 test cases across all three languages.
+**Expected Output:**
+- 71 test cases across English, Sinhala, and Tamil
+- 67 ACCEPT outcomes (correctly classified)
+- 4 REJECT outcomes (unrelated queries)
+
+---
 
 ## API Endpoints
 
@@ -130,15 +165,16 @@ Test results show ACCEPT/REJECT outcomes for 71 test cases across all three lang
 | `/api/diagram` | GET | Get DFA diagram |
 | `/api/greet` | POST | Handle greetings |
 
-### Classify Query Example
+### Example API Call
 
+**Request:**
 ```bash
 curl -X POST http://127.0.0.1:5000/api/classify \
   -H "Content-Type: application/json" \
-  -d '{"query": "NIC application", "language": "en"}'
+  -d "{\"query\": \"NIC application\", \"language\": \"en\"}"
 ```
 
-Response:
+**Response:**
 ```json
 {
   "query": "NIC application",
@@ -149,28 +185,49 @@ Response:
   "transition": "δ(q0, 'nic') → q1",
   "service": {
     "name": "NIC Services",
-    "description": "National Identity Card application...",
     "office": "Department of Registration of Persons",
     "website": "www.drp.gov.lk"
   }
 }
 ```
 
+---
+
 ## Technologies Used
 
-- **Backend:** Python, Flask
-- **Frontend:** HTML5, CSS3, JavaScript
-- **Automaton:** Pure Python DFA implementation
-- **Styling:** Custom CSS with Sri Lankan government theme
+| Technology | Purpose |
+|------------|---------|
+| Python 3 | Backend logic |
+| Flask | Web framework |
+| HTML5/CSS3 | Frontend interface |
+| JavaScript | Client-side logic |
+| Pure Python DFA | Automaton implementation |
+
+---
 
 ## Features
 
-- Pure Python DFA implementation (no external automaton libraries)
-- Trilingual support (English, Sinhala, Tamil)
-- Real-time DFA state visualization
-- ACCEPT/REJECT classification display
-- Government office information and required documents
-- Responsive design for mobile and desktop
+- **Pure Python DFA** - No external automaton libraries
+- **Trilingual Support** - English, Sinhala, Tamil
+- **Real-time Visualization** - Live DFA state updates
+- **ACCEPT/REJECT Display** - Clear classification status
+- **Service Information** - Office details, required documents, websites
+- **Responsive Design** - Works on desktop and mobile
+
+---
+
+## Assignment Checklist
+
+- [x] Problem Definition with national relevance
+- [x] Automata Design (DFA with 14 states)
+- [x] State Diagram with transitions
+- [x] Python Implementation (Pure Python + Flask)
+- [x] ACCEPT/REJECT outcomes
+- [x] Trilingual support (EN/SI/TA)
+- [x] Test cases (71 tests)
+- [x] Web interface demonstration
+
+---
 
 ## License
 
