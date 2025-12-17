@@ -128,10 +128,12 @@ def handle_greeting():
     query = data.get('query', '').lower().strip()
     language = data.get('language', 'en')
 
-    # Check if it's a greeting
+    # Check if it's a greeting (whole word match only)
+    query_words = query.split()
     for lang, greet_data in GREETINGS.items():
         for keyword in greet_data['keywords']:
-            if keyword in query:
+            # Check if query equals keyword or keyword is a separate word in query
+            if query == keyword or keyword in query_words:
                 return jsonify({
                     'is_greeting': True,
                     'response': GREETINGS[language]['response'],
