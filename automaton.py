@@ -13,20 +13,7 @@ Formal Definition:
 """
 
 class GovernmentServiceDFA:
-    """
-    DFA for classifying government service queries.
-
-    State Diagram:
-                    ┌─────────────────────────────────────────┐
-                    │              START (q0)                  │
-                    └─────────────────────────────────────────┘
-                                      │
-            ┌─────────┬─────────┬─────┴─────┬─────────┬─────────┐
-            ▼         ▼         ▼           ▼         ▼         ▼
-         [q1]      [q2]      [q3]  ...   [q11]    [q12]    [q_reject]
-         NIC     Passport   Birth       Education Health   REJECTED
-        ACCEPT    ACCEPT    ACCEPT       ACCEPT   ACCEPT    REJECT
-    """
+    """DFA for classifying government service queries."""
 
     def __init__(self):
         # Define states
@@ -526,39 +513,6 @@ class GovernmentServiceDFA:
 
         return result
 
-    def get_state_diagram(self):
-        """Return ASCII representation of the DFA state diagram."""
-        diagram = """
-╔══════════════════════════════════════════════════════════════════════════════╗
-║                    GOVERNMENT SERVICE QUERY CLASSIFIER DFA                    ║
-╠══════════════════════════════════════════════════════════════════════════════╣
-║                                                                              ║
-║                              ┌─────────┐                                     ║
-║                              │   q0    │ (START)                             ║
-║                              │  START  │                                     ║
-║                              └────┬────┘                                     ║
-║                                   │                                          ║
-║         ┌──────────┬──────────┬───┴───┬──────────┬──────────┐               ║
-║         ▼          ▼          ▼       ▼          ▼          ▼               ║
-║    ┌─────────┐┌─────────┐┌─────────┐┌─────────┐┌─────────┐┌─────────┐       ║
-║    │   q1    ││   q2    ││   q3    ││  ...    ││  q12    ││q_reject │       ║
-║    │   NIC   ││PASSPORT ││  BIRTH  ││         ││ HEALTH  ││ REJECT  │       ║
-║    │ ACCEPT  ││ ACCEPT  ││ ACCEPT  ││ ACCEPT  ││ ACCEPT  ││ REJECT  │       ║
-║    └─────────┘└─────────┘└─────────┘└─────────┘└─────────┘└─────────┘       ║
-║                                                                              ║
-╠══════════════════════════════════════════════════════════════════════════════╣
-║  Transitions: δ(q0, keyword) → qN                                            ║
-║  • NIC/අනන්‍යතා/அடையாள → q1          • Passport/ගමන්/கடவுச்சீட்டு → q2        ║
-║  • Birth/උප්පැන්න/பிறப்பு → q3        • Death/මරණ/இறப்பு → q4                 ║
-║  • Marriage/විවාහ/திருமணம் → q5       • License/රියදුරු/ஓட்டுநர் → q6          ║
-║  • Vehicle/වාහන/வாகனம் → q7          • Tax/බදු/வரி → q8                       ║
-║  • Pension/විශ්‍රාම/ஓய்வூதியம் → q9     • Samurdhi/සමෘද්ධි/சமுர்தி → q10        ║
-║  • Education/අධ්‍යාපනය/கல்வி → q11    • Health/සෞඛ්‍ය/சுகாதாரம் → q12           ║
-║  • Other → q_reject                                                          ║
-╚══════════════════════════════════════════════════════════════════════════════╝
-"""
-        return diagram
-
     def get_formal_definition(self):
         """Return formal DFA definition."""
         return {
@@ -586,10 +540,8 @@ class GovernmentServiceDFA:
 if __name__ == "__main__":
     dfa = GovernmentServiceDFA()
 
-    print(dfa.get_state_diagram())
-    print("\n" + "="*60)
     print("Testing DFA with sample queries:")
-    print("="*60 + "\n")
+    print("="*40)
 
     test_queries = [
         ("I need to get my NIC", "en"),
