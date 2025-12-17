@@ -513,6 +513,43 @@ class GovernmentServiceDFA:
 
         return result
 
+    def get_state_diagram(self):
+        """Return a text-based DFA state diagram."""
+        diagram = []
+        diagram.append("\n" + "=" * 60)
+        diagram.append("   DFA STATE DIAGRAM")
+        diagram.append("=" * 60)
+        diagram.append("\nStart State: q0 (START)")
+        diagram.append("\nState Transitions (δ):")
+        diagram.append("-" * 60)
+        
+        # Group transitions by state
+        state_transitions = {}
+        for keyword, state in self.transitions.items():
+            if state not in state_transitions:
+                state_transitions[state] = []
+            state_transitions[state].append(keyword)
+        
+        # Display transitions for each state
+        for state in sorted(state_transitions.keys()):
+            state_name = self.states.get(state, 'UNKNOWN')
+            diagram.append(f"\n{state} ({state_name}):")
+            
+            # Show sample keywords (limit to avoid clutter)
+            keywords = state_transitions[state]
+            sample_keywords = keywords[:5]  # Show first 5 keywords
+            for kw in sample_keywords:
+                diagram.append(f"  ← \"{kw}\"")
+            if len(keywords) > 5:
+                diagram.append(f"  ... and {len(keywords) - 5} more keywords")
+        
+        diagram.append("\n" + "-" * 60)
+        diagram.append(f"Accepting States: {', '.join(sorted(self.accepting_states))}")
+        diagram.append(f"Reject State: q_reject")
+        diagram.append("=" * 60 + "\n")
+        
+        return "\n".join(diagram)
+
     def get_formal_definition(self):
         """Return formal DFA definition."""
         return {
